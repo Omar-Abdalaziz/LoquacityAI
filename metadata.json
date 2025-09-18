@@ -1,0 +1,6 @@
+{
+  "name": "Loquacity AI",
+  "description": "An AI-powered smart search browser that provides accurate, comprehensive, and well-sourced answers to user queries through a multi-stage information processing pipeline, similar to Perplexity AI.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loquacity AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#f0f8ff',
+                100: '#e0f0fe',
+                200: '#c2e3fd',
+                300: '#a3d6fc',
+                400: '#6abcf9',
+                500: '#32a2f7',
+                600: '#0088f5', // Main brand color
+                700: '#0075d1',
+                800: '#0062ac',
+                900: '#00548e',
+                950: '#003355',
+              },
+              accent: {
+                50: '#f0f9ff',
+                100: '#e0f2fe',
+                200: '#bae6fd',
+                300: '#7dd3fc',
+                400: '#38bdf8', // Main accent color
+                500: '#0ea5e9',
+                600: '#0284c7',
+                700: '#0369a1',
+                800: '#075985',
+                900: '#0c4a6e',
+                950: '#082f49',
+              },
+              neutral: {
+                50: '#f8fafc',
+                100: '#f1f5f9',
+                200: '#e2e8f0',
+                300: '#cbd5e1',
+                400: '#94a3b8',
+                500: '#64748b',
+                600: '#475569',
+                700: '#334155',
+                800: '#1e293b',
+                900: '#0f172a',
+                950: '#020617',
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      /* For custom scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      
+      /* Light Mode Scrollbar */
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9; /* neutral-100 */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1; /* neutral-300 */
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8; /* neutral-400 */
+      }
+      
+      /* Dark Mode Scrollbar */
+      .dark ::-webkit-scrollbar-track {
+        background: #0f172a; /* neutral-900 */
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #334155; /* neutral-700 */
+      }
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #475569; /* neutral-600 */
+      }
+
+      /* Animation for fade-in effect */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+      /* Animation for pop-in effect */
+      @keyframes popIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .animate-pop-in {
+        animation: popIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      }
+
+      /* Gradient animation for Auth Page */
+      @keyframes gradient-move {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .animate-gradient-move {
+        background-size: 400% 400%;
+        animation: gradient-move 15s ease infinite;
+      }
+
+      /* Styles for professional citations */
+      sup.citation button {
+          background: none; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 1.125rem; /* 18px */
+          height: 1.125rem; /* 18px */
+          font-size: 0.625rem; /* 10px */
+          font-weight: 700;
+          line-height: 1;
+          color: #0284c7; /* accent-600 */
+          background-color: #e0f2fe; /* accent-100 */
+          border-radius: 9999px;
+          transition: all 0.2s ease-in-out;
+          vertical-align: text-top; /* Aligns better than super */
+          margin: 0 0.125rem;
+      }
+      .dark sup.citation button {
+          color: #7dd3fc; /* accent-300 */
+          background-color: #0c4a6e; /* accent-900 */
+      }
+      sup.citation button:hover {
+          color: white;
+          background-color: #0ea5e9; /* accent-500 */
+          transform: scale(1.15);
+      }
+      .dark sup.citation button:hover {
+          background-color: #38bdf8; /* accent-400 */
+          color: #082f49; /* accent-950 */
+      }
+      .source-card {
+        scroll-margin-top: 5rem; /* Offset for sticky header */
+      }
+      /* Animation for highlighting a source card */
+      @keyframes highlight-source {
+        0% { background-color: rgba(56, 189, 248, 0.2); } /* accent-400 with opacity */
+        100% { background-color: transparent; }
+      }
+      .source-card.highlight {
+        animation: highlight-source 1.5s ease-out forwards;
+      }
+      
+      /* Animation for old typing indicator */
+      @keyframes pulse-dot {
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 1; }
+      }
+      .animate-pulse-dot {
+        animation: pulse-dot 1.4s infinite;
+      }
+
+      /* New animation for the 'is answering' indicator */
+      @keyframes is-typing-pulse {
+        0% {
+          opacity: 0.2;
+        }
+        20% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.2;
+        }
+      }
+      .animate-is-typing-pulse {
+        animation: is-typing-pulse 1.4s infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.11.0",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@^2.44.4",
+    "marked": "https://esm.sh/marked@^13.0.1",
+    "dompurify": "https://esm.sh/dompurify@^3.1.6",
+    "vite": "https://aistudiocdn.com/vite@^7.1.5",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "url": "https://aistudiocdn.com/url@^0.11.4",
+    "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0",
+    "remark-gfm": "https://aistudiocdn.com/remark-gfm@^4.0.1",
+    "react-syntax-highlighter/": "https://aistudiocdn.com/react-syntax-highlighter@^15.6.6/",
+    "react-syntax-highlighter": "https://aistudiocdn.com/react-syntax-highlighter@^15.6.6"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="antialiased bg-neutral-100 dark:bg-neutral-900">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
